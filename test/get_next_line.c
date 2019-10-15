@@ -6,10 +6,16 @@
 /*   By: talexia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:25:53 by talexia           #+#    #+#             */
-/*   Updated: 2019/09/23 18:37:08 by talexia          ###   ########.fr       */
+/*   Updated: 2019/10/15 14:51:29 by talexia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	get_next_line(const int fd, char **line)
 {
+	int		i;
+	char	**test;
+
+	i = fd;
+	test = line;
+	return (1);
 }
