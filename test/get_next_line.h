@@ -6,11 +6,12 @@
 /*   By: talexia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:20:48 by talexia           #+#    #+#             */
-/*   Updated: 2019/09/23 15:22:29 by talexia          ###   ########.fr       */
+/*   Updated: 2019/09/23 18:37:31 by talexia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+int		get_next_line(const int fd, char **line);
 #endif
