@@ -6,7 +6,7 @@
 #    By: talexia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 18:09:44 by talexia           #+#    #+#              #
-#    Updated: 2019/10/15 15:21:20 by talexia          ###   ########.fr        #
+#    Updated: 2019/10/15 15:30:30 by talexia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ FILEO = *.o
 all: $(NAME)
 
 $(NAME):
-	@gcc -Wall -Wextra -Werror -o $(NAME) $(SRC) -L../libft/ -lft -I $(HEAD)
+	gcc -Wall -Wextra -Werror -o $(NAME) $(SRC) -L../libft/ -lft -I $(HEAD)
+	./out test_main/test_files/alpaca
 
 clean:
 	@rm -f $(FILEO)
