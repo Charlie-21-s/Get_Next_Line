@@ -6,7 +6,7 @@
 /*   By: talexia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:25:53 by talexia           #+#    #+#             */
-/*   Updated: 2019/10/22 13:15:30 by talexia          ###   ########.fr       */
+/*   Updated: 2019/10/22 13:30:29 by talexia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_list	*ft_check_log(int fd, t_list **log)
 		tmp = tmp->next;
 	}
 	tmp = ft_lstnew("", fd);
-	ft_lstadd(
+	ft_lstadd(log, tmp);
+	return (tmp);
 }
 
 int		get_next_line(const int fd, char **line)
