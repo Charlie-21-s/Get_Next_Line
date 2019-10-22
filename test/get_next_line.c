@@ -6,41 +6,35 @@
 /*   By: talexia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:25:53 by talexia           #+#    #+#             */
-/*   Updated: 2019/10/22 13:30:29 by talexia          ###   ########.fr       */
+/*   Updated: 2019/10/22 16:56:42 by talexia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	*ft_check_log(int fd, t_list **log)
-{
-	t_list	*tmp;
-	int		id;
-
-	if (!log)
-		return (NULL);
-	tmp = *log;
-	while (log)
-	{
-		id = (int)tmp->content_size == fd;
-		if (id = fd)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	tmp = ft_lstnew("", fd);
-	ft_lstadd(log, tmp);
-	return (tmp);
-}
-
 int		get_next_line(const int fd, char **line)
 {
-	static t_list	*log;
-	t_list			*tmp;
+	int				i;
+	char			buf[BUFF_SIZE + 1];
+	char			*end;
+	int				flag;
+	static char		*log;
 
-	if (fd < 0 || !line)
+	if (fd < 0)
 		return (-1);
-	tmp = ft_check_log(fd, &log);
-	if (!tmp)
-		return (-1);
-	return (1);
+	flag = 1;
+	if (log)
+		*line = ft_strdup(log);
+	else
+		*line = ft_strnew(1);
+	while (flag && (i = read(fd, buf, BUFF_SIZE)))
+	{
+	!(end = ft_strchr(buf, '\n')))
+		buf[i] = '\0';
+		*line = ft_strjoin(*line, buf);
+	}
+	*end = '\0';
+	*line = ft_strjoin(*line, buf);
+	log = ft_strdup(++end);
+	return (0);
 }
