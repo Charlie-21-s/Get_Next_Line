@@ -34,7 +34,7 @@ char	*ft_check_log(char *log, char **line)
 	return (end);
 }
 
-int		get_next_line(const int fd, char **line)
+int		ft_read_line(const int fd, char **line)
 {
 	int				i;
 	char			buf[BUFF_SIZE + 1];
@@ -57,8 +57,36 @@ int		get_next_line(const int fd, char **line)
 		*line = ft_strjoin(*line, buf);
 		free(tmp);
 	}
-	if (i || ft_strlen(*line))
+	if (i || ft_strlen(*line) || ft_strlen(log))
 		return (1);
 	else
 		return (0);
+}
+
+t_log	*ft_create_history(int fd)
+{
+	t_log	*new;
+
+	new = (t_log*)malloc(sizeof(t_log));
+	if (!new)
+		return (NULL);
+	new->next = NULL;
+	new->remain = NULL;
+	return (new);
+}
+
+int		get_next_line(const int fd, char **line)
+{
+	static t_log	*history;
+	t_log			*tmp;
+
+	if (history == NULL)
+		history = ft_create_history(fd);
+	tmp = history;
+	while (tmp->fd != fd)
+		if (tmp->next == NULL)
+			if (!(tmp->next = ft_create_history(fd)))
+				return (-1);
+		else
+			tmp = tmp->next;
 }

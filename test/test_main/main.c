@@ -15,28 +15,14 @@
 
 int	main(int params, char **files)
 {
-	int		i;
 	int		fd;
 	char	*line;
-//	int		get;
-//	int		a;
 
-	if (params > 1)
-	{
-		i = 0;
-		while (++i < params)
-		{
-//			a = 0;
-			fd = open(files[i], O_RDONLY);
-/*			while (++a<=11)
-			{
-				get = get_next_line(fd, &line);
-				printf("%s\n", line);
-			}
-			*/
-			while (get_next_line(fd, &line))
-				printf("%s\n\n", line);
-		}
-	}
+	fd = open("test_files/alpaca", O_RDONLY);
+	while (get_next_line(fd, &line))
+		printf("%s\n", line);
+	fd = open("test_files/foreword", O_RDONLY);
+	while (get_next_line(fd, &line))
+		printf("%s\n", line);
 	return (0);
 }
