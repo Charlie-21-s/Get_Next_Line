@@ -13,16 +13,21 @@
 #include "../get_next_line.h"
 #include <stdio.h>
 
-int	main(int params, char **files)
+int	main(void)
 {
-	int		fd;
+	int		fd1;
+	int		fd2;
 	char	*line;
 
-	fd = open("test_files/alpaca", O_RDONLY);
-	while (get_next_line(fd, &line))
+	fd1 = open("test_files/alpaca", O_RDONLY);
+	fd2 = open("test_files/foreword", O_RDONLY);
+	printf("%d", get_next_line(fd1, &line));
+	printf("%s\n", line);
+	printf("%d", get_next_line(fd2, &line));
+	printf("%s\n", line);
+	while (get_next_line(fd1, &line))
 		printf("%s\n", line);
-	fd = open("test_files/foreword", O_RDONLY);
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd2, &line))
 		printf("%s\n", line);
 	return (0);
 }

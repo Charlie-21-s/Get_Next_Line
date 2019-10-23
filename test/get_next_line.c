@@ -6,7 +6,7 @@
 /*   By: talexia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:25:53 by talexia           #+#    #+#             */
-/*   Updated: 2019/10/23 16:26:16 by talexia          ###   ########.fr       */
+/*   Updated: 2019/10/23 19:06:54 by talexia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,28 @@ char	*ft_check_log(char *log, char **line)
 	return (end);
 }
 
-int		ft_read_line(const int fd, char **line)
+int		ft_read_line(const int fd, char **line, char **remain)
 {
 	int				i;
 	char			buf[BUFF_SIZE + 1];
 	char			*end;
 	char			*tmp;
-	static char		*log;
 
-	if (fd < 0)
-		return (-1);
-	end = ft_check_log(log, line);
+	end = ft_check_log(*remain, line);
 	while (!end && (i = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[i] = '\0';
 		if ((end = ft_strchr(buf, '\n')))
 		{
 			*end = '\0';
-			log = ft_strdup(++end);
+			*remain = ft_strdup(++end);
 		}
 		tmp = *line;
-		*line = ft_strjoin(*line, buf);
+		if (!(*line = ft_strjoin(*line, buf)))
+			return (-1);
 		free(tmp);
 	}
-	if (i || ft_strlen(*line) || ft_strlen(log))
+	if (i || ft_strlen(*line) || ft_strlen(*remain))
 		return (1);
 	else
 		return (0);
@@ -70,6 +68,7 @@ t_log	*ft_create_history(int fd)
 	new = (t_log*)malloc(sizeof(t_log));
 	if (!new)
 		return (NULL);
+	new->fd = fd;
 	new->next = NULL;
 	new->remain = NULL;
 	return (new);
@@ -80,13 +79,15 @@ int		get_next_line(const int fd, char **line)
 	static t_log	*history;
 	t_log			*tmp;
 
+	if (fd < 0)
+		return (-1);
 	if (history == NULL)
 		history = ft_create_history(fd);
 	tmp = history;
 	while (tmp->fd != fd)
 		if (tmp->next == NULL)
-			if (!(tmp->next = ft_create_history(fd)))
-				return (-1);
+			tmp->next = ft_create_history(fd);
 		else
 			tmp = tmp->next;
+	return (ft_read_line(fd, line, &tmp->remain));
 }

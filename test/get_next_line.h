@@ -6,7 +6,7 @@
 /*   By: talexia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 15:20:48 by talexia           #+#    #+#             */
-/*   Updated: 2019/10/23 13:34:03 by talexia          ###   ########.fr       */
+/*   Updated: 2019/10/23 19:05:19 by talexia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 # include "libft/includes/libft.h"
 # define BUFF_SIZE 3
 
-typedef struct          s_log
+typedef struct			s_log
 {
-    char                *remain;
-    int                 fd;
-    struct s_log        *next;    
-}                       t_log;
+	char				*remain;
+	int					fd;
+	struct s_log		*next;
+}						t_log;
 
-int		get_next_line(const int fd, char **line);
+int						get_next_line(const int fd, char **line);
 #endif
