@@ -6,7 +6,7 @@
 /*   By: talexia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 12:09:01 by talexia           #+#    #+#             */
-/*   Updated: 2019/10/15 12:59:56 by talexia          ###   ########.fr       */
+/*   Updated: 2019/10/23 15:27:06 by talexia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ size_t	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
-		i++;
+	if (str)
+		while (str[i])
+			i++;
 	return (i);
 }
