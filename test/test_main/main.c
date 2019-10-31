@@ -23,11 +23,19 @@ int	main(void)
 	fd2 = open("test_files/foreword", O_RDONLY);
 	printf("%d", get_next_line(fd1, &line));
 	printf("%s\n", line);
+	free(line);
 	printf("%d", get_next_line(fd2, &line));
 	printf("%s\n", line);
+	free(line);
 	while (get_next_line(fd1, &line))
+	{
 		printf("%s\n", line);
+		free (line);
+	}
 	while (get_next_line(fd2, &line))
+	{
 		printf("%s\n", line);
+		free (line);
+	}
 	return (0);
 }

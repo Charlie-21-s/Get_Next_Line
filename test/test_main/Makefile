@@ -19,7 +19,7 @@ all: $(NAME)
 
 $(NAME):
 	gcc -Wall -Wextra -Werror -o $(NAME) $(SRC) -L../libft/ -lft -I $(HEAD)
-	./out test_files/alpaca
+	./out 
 
 clean:
 	@rm -f $(FILEO)

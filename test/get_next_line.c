@@ -30,7 +30,7 @@ char	*ft_check_log(char *log, char **line)
 			ft_strclr(log);
 		}
 	else
-		*line = ft_strnew(1);
+		*line = ft_strnew(1);	
 	return (end);
 }
 
@@ -78,11 +78,13 @@ int		get_next_line(const int fd, char **line)
 {
 	static t_log	*history;
 	t_log			*tmp;
+	char			buf[1];
 
-	if (fd < 0)
+	if (fd < 0 || !line || (read(fd, buf, 0)) < 0)
 		return (-1);
 	if (history == NULL)
-		history = ft_create_history(fd);
+		if (!(history = ft_create_history(fd)))
+			return (-1);
 	tmp = history;
 	while (tmp->fd != fd)
 		if (tmp->next == NULL)
