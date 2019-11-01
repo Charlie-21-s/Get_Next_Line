@@ -25,28 +25,28 @@ int	main(void)
 	fd3 = open("test_files/333", O_RDONLY);
 	printf("%d\n", get_next_line(fd1, &line));
 	printf("%s\n", line);
-//	ft_strclr(line);
-//	free(line);
+	ft_strclr(line);
+	free(line);
 	printf("%d\n", get_next_line(fd2, &line));
 	printf("%s\n", line);
-//	ft_strclr(line);
-//	free(line);
+	ft_strclr(line);
+	free(line);
 	printf("%d\n", get_next_line(fd3, &line));
 	printf("%s\n", line);
 	ft_strclr(line);
 	free(line);
 	printf("%d\n", get_next_line(fd1, &line));
 	printf("%s\n", line);
-//	ft_strclr(line);
-//	free(line);
+	ft_strclr(line);
+	free(line);
 	printf("%d\n", get_next_line(fd2, &line));
 	printf("%s\n", line);
-//	ft_strclr(line);
-//	free(line);
+	ft_strclr(line);
+	free(line);
 	printf("%d\n", get_next_line(fd3, &line));
 	printf("%s\n", line);
-//	ft_strclr(line);
-//	free(line);
+	ft_strclr(line);
+	free(line);
 
 
 	/*while (get_next_line(fd1, &line))
