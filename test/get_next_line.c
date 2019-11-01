@@ -12,12 +12,29 @@
 
 #include "get_next_line.h"
 
+void	ft_clear_history(t_log *history, t_log *tmp)
+{
+	t_log	*before;
+
+	before = history;
+	if (before != tmp)
+	{
+		while (before->next != tmp)
+			before = before->next;
+		before->next = tmp->next;
+	}
+	else
+		history = tmp->next;
+	free(tmp->remain);
+	free(tmp);
+}
+
 char	*ft_check_log(char *log, char **line)
 {
 	char	*end;
 
 	end = NULL;
-	if (log)
+	if (log && BUFF_SIZE != 1)
 		if ((end = ft_strchr(log, '\n')))
 		{
 			*end = '\0';
@@ -30,7 +47,7 @@ char	*ft_check_log(char *log, char **line)
 			ft_strclr(log);
 		}
 	else
-		*line = ft_strnew(1);	
+		*line = ft_strnew(1);
 	return (end);
 }
 
@@ -48,7 +65,8 @@ int		ft_read_line(const int fd, char **line, char **remain)
 		if ((end = ft_strchr(buf, '\n')))
 		{
 			*end = '\0';
-			*remain = ft_strdup(++end);
+			if (BUFF_SIZE != 1)
+				*remain = ft_strcpy(*remain, ++end);
 		}
 		tmp = *line;
 		if (!(*line = ft_strjoin(*line, buf)))
@@ -68,9 +86,14 @@ t_log	*ft_create_history(int fd)
 	new = (t_log*)malloc(sizeof(t_log));
 	if (!new)
 		return (NULL);
+	new->remain = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	if (!(new->remain))
+	{
+		free(new);
+		return (NULL);
+	}
 	new->fd = fd;
 	new->next = NULL;
-	new->remain = NULL;
 	return (new);
 }
 
@@ -79,8 +102,9 @@ int		get_next_line(const int fd, char **line)
 	static t_log	*history;
 	t_log			*tmp;
 	char			buf[1];
+	int				result;
 
-	if (fd < 0 || !line || (read(fd, buf, 0)) < 0)
+	if (fd < 0 || !line || (read(fd, buf, 0)) < 0 || BUFF_SIZE < 1)
 		return (-1);
 	if (history == NULL)
 		if (!(history = ft_create_history(fd)))
@@ -91,5 +115,8 @@ int		get_next_line(const int fd, char **line)
 			tmp->next = ft_create_history(fd);
 		else
 			tmp = tmp->next;
-	return (ft_read_line(fd, line, &tmp->remain));
+	result = ft_read_line(fd, line, &tmp->remain);
+	if (result == 0)
+		ft_clear_history(history, tmp);
+	return (result);
 }

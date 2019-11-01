@@ -17,25 +17,55 @@ int	main(void)
 {
 	int		fd1;
 	int		fd2;
+	int		fd3;	
 	char	*line;
 
 	fd1 = open("test_files/alpaca", O_RDONLY);
 	fd2 = open("test_files/foreword", O_RDONLY);
-	printf("%d", get_next_line(fd1, &line));
+	fd3 = open("test_files/333", O_RDONLY);
+	printf("%d\n", get_next_line(fd1, &line));
 	printf("%s\n", line);
-	free(line);
-	printf("%d", get_next_line(fd2, &line));
+//	ft_strclr(line);
+//	free(line);
+	printf("%d\n", get_next_line(fd2, &line));
 	printf("%s\n", line);
+//	ft_strclr(line);
+//	free(line);
+	printf("%d\n", get_next_line(fd3, &line));
+	printf("%s\n", line);
+	ft_strclr(line);
 	free(line);
-	while (get_next_line(fd1, &line))
+	printf("%d\n", get_next_line(fd1, &line));
+	printf("%s\n", line);
+//	ft_strclr(line);
+//	free(line);
+	printf("%d\n", get_next_line(fd2, &line));
+	printf("%s\n", line);
+//	ft_strclr(line);
+//	free(line);
+	printf("%d\n", get_next_line(fd3, &line));
+	printf("%s\n", line);
+//	ft_strclr(line);
+//	free(line);
+
+
+	/*while (get_next_line(fd1, &line))
 	{
 		printf("%s\n", line);
 		free (line);
+		line = NULL;
 	}
 	while (get_next_line(fd2, &line))
 	{
 		printf("%s\n", line);
 		free (line);
+		line = NULL;
 	}
+		while (get_next_line(fd2, &line))
+	{
+		printf("%s\n", line);
+		free (line);
+		line = NULL;
+	}*/
 	return (0);
 }
